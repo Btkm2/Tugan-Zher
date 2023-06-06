@@ -11,7 +11,7 @@ import SwiftUI
 struct Tugan_ZherApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            TabPageView()
         }
     }
 }
