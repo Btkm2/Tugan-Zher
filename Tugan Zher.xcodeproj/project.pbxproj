@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C0BA6092A320E56005739D5 /* SearchPageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0BA6082A320E56005739D5 /* SearchPageView.swift */; };
+		0C0BA60B2A320F64005739D5 /* CountryClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0BA60A2A320F64005739D5 /* CountryClass.swift */; };
+		0C0BA60D2A32163A005739D5 /* CityClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0BA60C2A32163A005739D5 /* CityClass.swift */; };
+		0C0BA60F2A3216A5005739D5 /* CountryAndCityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C0BA60E2A3216A5005739D5 /* CountryAndCityProtocol.swift */; };
 		0C49B5672A27352700936575 /* Tugan_ZherApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49B5662A27352700936575 /* Tugan_ZherApp.swift */; };
 		0C49B5692A27352700936575 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C49B5682A27352700936575 /* ContentView.swift */; };
 		0C49B56B2A27352900936575 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C49B56A2A27352900936575 /* Assets.xcassets */; };
@@ -20,6 +24,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0C0BA6082A320E56005739D5 /* SearchPageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPageView.swift; sourceTree = "<group>"; };
+		0C0BA60A2A320F64005739D5 /* CountryClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryClass.swift; sourceTree = "<group>"; };
+		0C0BA60C2A32163A005739D5 /* CityClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityClass.swift; sourceTree = "<group>"; };
+		0C0BA60E2A3216A5005739D5 /* CountryAndCityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryAndCityProtocol.swift; sourceTree = "<group>"; };
 		0C49B5632A27352700936575 /* Tugan Zher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tugan Zher.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C49B5662A27352700936575 /* Tugan_ZherApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tugan_ZherApp.swift; sourceTree = "<group>"; };
 		0C49B5682A27352700936575 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -87,6 +95,7 @@
 			children = (
 				0C5623902A2DF34A00BC4AA6 /* AccountPageView.swift */,
 				0C5623922A2E4CF200BC4AA6 /* TabPageView.swift */,
+				0C0BA6082A320E56005739D5 /* SearchPageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -96,6 +105,9 @@
 			children = (
 				0CA7AA552A2CA723004B00E1 /* HotelRatingClass.swift */,
 				0CA7AA572A2D01F0004B00E1 /* TourDetailsClass.swift */,
+				0C0BA60A2A320F64005739D5 /* CountryClass.swift */,
+				0C0BA60C2A32163A005739D5 /* CityClass.swift */,
+				0C0BA60E2A3216A5005739D5 /* CountryAndCityProtocol.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -185,11 +197,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				0C49B5692A27352700936575 /* ContentView.swift in Sources */,
+				0C0BA60B2A320F64005739D5 /* CountryClass.swift in Sources */,
 				0C5623912A2DF34A00BC4AA6 /* AccountPageView.swift in Sources */,
 				0CA7AA5B2A2D02CE004B00E1 /* NetworkClass.swift in Sources */,
 				0CA7AA562A2CA723004B00E1 /* HotelRatingClass.swift in Sources */,
 				0C49B5672A27352700936575 /* Tugan_ZherApp.swift in Sources */,
+				0C0BA6092A320E56005739D5 /* SearchPageView.swift in Sources */,
+				0C0BA60D2A32163A005739D5 /* CityClass.swift in Sources */,
 				0C5623932A2E4CF200BC4AA6 /* TabPageView.swift in Sources */,
+				0C0BA60F2A3216A5005739D5 /* CountryAndCityProtocol.swift in Sources */,
 				0CA7AA582A2D01F0004B00E1 /* TourDetailsClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

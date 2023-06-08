@@ -19,6 +19,10 @@ struct TabPageView: View {
                 .tabItem {
                     Label("Profile", systemImage: "person.fill")
                 }
+            SearchPageView()
+                .tabItem {
+                    Label("Search", systemImage: "magnifyingglass")
+                }
         }
     }
 }
