@@ -82,33 +82,41 @@ struct ContentView_Previews: PreviewProvider {
 struct TopElements: View {
     @Binding var down_image: Image?
     @Binding var fetched_text: String
+    @State var hotel_detail_sheet_toggle = false
     var body: some View {
         VStack(alignment: .leading) {
             Text("Explore top rated hotels")
-            if let image = down_image {
-                image.resizable()
-                    .renderingMode(.original)
-                    .aspectRatio(contentMode: .fit)
-                    .cornerRadius(10)
-                    .overlay {
-                        HStack {
-                            Text(fetched_text)
-                            Image(systemName: "star.fill")
-                                .resizable()
-                                .renderingMode(.original)
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                                .foregroundColor(.yellow)
+            Button(action: {
+                hotel_detail_sheet_toggle = true
+            }, label: {
+                if let image = down_image {
+                    image.resizable()
+                        .renderingMode(.original)
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                        .overlay {
+                            HStack {
+                                Text(fetched_text)
+                                Image(systemName: "star.fill")
+                                    .resizable()
+                                    .renderingMode(.original)
+                                    .aspectRatio(contentMode: .fit)
+                                    .frame(width: 20, height: 20)
+                                    .foregroundColor(.yellow)
+                            }
+                            .frame(width: 70, height: 30)
+                            .background(Color("LightGreen"))
+                            .position(x: 35, y: 25)
                         }
-                        .frame(width: 70, height: 30)
-                        .background(Color("LightGreen"))
-                        .position(x: 35, y: 25)
-                    }
-            }
+                }
+            })
+            .foregroundColor(Color.black)
 //            Rectangle()
 //                .frame(width: UIScreen.main.bounds.width*0.9, height: 200)
 //                .background(Color.gray)
             Text("Location")
+        }
+        .sheet(isPresented: $hotel_detail_sheet_toggle) { HotelDetailsPageView()
         }
     }
 }

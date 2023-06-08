@@ -15,13 +15,13 @@ struct TabPageView: View {
                 .tabItem {
                     Label("Home", systemImage: "house")
                 }
-            AccountPageView()
-                .tabItem {
-                    Label("Profile", systemImage: "person.fill")
-                }
             SearchPageView()
                 .tabItem {
                     Label("Search", systemImage: "magnifyingglass")
+                }
+            AccountPageView()
+                .tabItem {
+                    Label("Profile", systemImage: "person.fill")
                 }
         }
     }
