@@ -10,11 +10,42 @@ import Alamofire
 
 struct ContentView: View {
     @State var image: Image?
+    @State var Almaty_image: Image?
+    @State var DoubleTree_Hilton_image: Image?
     @State var serverText: String = ""
+    @State var hotels: [Hotel] = []
+    @State var Almaty_description = ""
+    @State var DoubleTree_Hilton_description = ""
     var body: some View {
         Form {
-            Section(header: Text("Explore")) {
+            Section(header: Text("Explore top rated hotels")) {
                 TopElements(down_image: $image, fetched_text: $serverText)
+            }
+            Section {
+                VStack(alignment: .leading) {
+                    Text(Almaty_description)
+                        .font(.system(size: 18, weight: .thin, design: .default))
+                    if let image = Almaty_image {
+                        image
+                            .resizable()
+                            .renderingMode(.original)
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(10)
+                    }
+                }
+            }
+            Section {
+                VStack {
+                    Text(DoubleTree_Hilton_description)
+                        .font(.system(size: 18, weight: .thin, design: .default))
+                    if let image = DoubleTree_Hilton_image {
+                        image
+                            .resizable()
+                            .renderingMode(.original)
+                            .aspectRatio(contentMode: .fit)
+                            .cornerRadius(10)
+                    }
+                }
             }
             Section(header: Text("Tours")) {
                 TopTourView()
@@ -23,6 +54,10 @@ struct ContentView: View {
         .onAppear {
             downloadImage()
             fetchTextFromServer()
+            download_second_Image()
+            download_third_Image()
+            fetchAlmatyTextFromServer()
+            fetchDoubleTreeHiltonTextFromServer()
         }
     }
     func downloadImage() {
@@ -41,6 +76,50 @@ struct ContentView: View {
                 let image = Image(uiImage: uiImage)
                 DispatchQueue.main.async {
                     self.image = image
+                }
+            }
+        }
+        .resume()
+    }
+    
+    func download_second_Image() {
+        //http://127.0.0.1:8000/media/hotel_pictures/2023/04/09/b1n9_ho_00_p_1024x768.jpg.webp
+        //http://127.0.0.1:8000/media/tour_pictures/2023/06/04/kolsai.jpg
+        guard let url = URL(string: "http://127.0.0.1:8000/media/hotel_pictures/2023/06/08/Almaty.jpeg") else {
+            return
+        }
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            if let error = error {
+                print("Error while dowloading image from server, \(error.localizedDescription)")
+                return
+            }
+            if let data = data, let uiImage = UIImage(data: data) {
+                let image = Image(uiImage: uiImage)
+                DispatchQueue.main.async {
+                    self.Almaty_image = image
+                }
+            }
+        }
+        .resume()
+    }
+    
+    func download_third_Image() {
+        //http://127.0.0.1:8000/media/hotel_pictures/2023/04/09/b1n9_ho_00_p_1024x768.jpg.webp
+        //http://127.0.0.1:8000/media/tour_pictures/2023/06/04/kolsai.jpg
+        guard let url = URL(string: "http://127.0.0.1:8000/media/hotel_pictures/2023/06/08/DoubleTree_By_Hilton_Almaty.jpeg") else {
+            return
+        }
+        URLSession.shared.dataTask(with: url) {
+            (data, response, error) in
+            if let error = error {
+                print("Error while dowloading image from server, \(error.localizedDescription)")
+                return
+            }
+            if let data = data, let uiImage = UIImage(data: data) {
+                let image = Image(uiImage: uiImage)
+                DispatchQueue.main.async {
+                    self.DoubleTree_Hilton_image = image
                 }
             }
         }
@@ -71,6 +150,56 @@ struct ContentView: View {
                 }
             }.resume()
         }
+    
+    func fetchAlmatyTextFromServer() {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/hotel/3/") else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error fetching text: \(error.localizedDescription)")
+                return
+            }
+            
+            if let data = data, let text = String(data: data, encoding: .utf8) {
+                let decoder = JSONDecoder()
+                if let jsonData = text.data(using: .utf8) {
+                    let hotel_almaty = try? decoder.decode(Hotel.self, from: jsonData)
+                    DispatchQueue.main.async {
+                        print("hotels: \(hotel_almaty)")
+                        self.Almaty_description = String(hotel_almaty?.name ?? "")
+                        print(Almaty_description)
+                    }
+                }
+            }
+        }.resume()
+        }
+    
+    func fetchDoubleTreeHiltonTextFromServer() {
+        guard let url = URL(string: "http://127.0.0.1:8000/api/hotel/2/") else {
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { (data, response, error) in
+            if let error = error {
+                print("Error fetching text: \(error.localizedDescription)")
+                return
+            }
+            
+            if let data = data, let text = String(data: data, encoding: .utf8) {
+                let decoder = JSONDecoder()
+                if let jsonData = text.data(using: .utf8) {
+                    let hotel_double_tree_hilton = try? decoder.decode(Hotel.self, from: jsonData)
+                    DispatchQueue.main.async {
+                        print("hotels: \(hotel_double_tree_hilton)")
+                        self.DoubleTree_Hilton_description = String(hotel_double_tree_hilton?.name ?? "")
+                        print(DoubleTree_Hilton_description)
+                    }
+                }
+            }
+        }.resume()
+        }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -85,7 +214,6 @@ struct TopElements: View {
     @State var hotel_detail_sheet_toggle = false
     var body: some View {
         VStack(alignment: .leading) {
-            Text("Explore top rated hotels")
             Button(action: {
                 hotel_detail_sheet_toggle = true
             }, label: {
